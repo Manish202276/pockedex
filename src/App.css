@@ -1,0 +1,45 @@
+.pockemon-list-wrapper{
+  display:flex;
+  flex-direction:row;
+  flex-wrap: wrap
+}
+.list-wrapper{
+  flex-basis:20%;
+}
+.name{
+  letter-spacing:10px;
+  margin:20%;
+}
+.img{
+  height:150px;
+  margin-left:20%
+}
+.pagination{
+  margin-left:45vw;
+  margin-top:10vh;
+  margin-bottom:10vh;
+}
+.pockedex{
+  margin-left:45vw;
+  margin-top:10vh;
+  margin-bottom:10vh;
+  letter-spacing:5px;
+  color:blue;
+}
+.search{
+  margin-left:35vw;
+  margin-bottom:5vh;
+  padding: 5px;
+  letter-spacing: 5px;
+  width:30%
+}
+.list-wrapper:hover{
+  background-color:aqua;
+}
+.iddetailswrapper{
+  margin-left:40vw;
+  margin-top:20vh;
+}
+.idcontent{
+  margin-left:40px
+}
