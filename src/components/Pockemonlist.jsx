@@ -8,6 +8,10 @@ export default function Pockemonlist(){
     const [pockedexUrl,setpockedexUrl]=useState('https://pokeapi.co/api/v2/pokemon');
     const [nextUrl,setnextUrl]=useState('');
     const [PreviousUrl,setPreviousUrl]=useState('');
+
+    const [q, setQ] = useState("");
+    const [searchParam] = useState(["name"]);
+
     async function downloadpockemon(){
         const response=await axios.get(pockedexUrl);
         const responsedata=response.data
@@ -30,12 +34,47 @@ export default function Pockemonlist(){
     useEffect(()=>{
         downloadpockemon()
     },[pockedexUrl])
+
+
+    function search(items) {
+        return items.filter((item) => {
+            return searchParam.some((newItem) => {
+                return (
+                    item[newItem]
+                        .toString()
+                        .toLowerCase()
+                        .indexOf(q.toLowerCase()) > -1
+                );
+            });
+        });
+    }
+
+
     return(
+        
         <div className="pockemon-list">
+                        <div className="wrapperclass">
+                        <label htmlFor="search-form">
+                            <input
+                                type="search"
+                                name="search-form"
+                                id="search-form"
+                                className="search"
+                                placeholder="Enter pockemon..."
+                                value={q}
+                                onChange={(e) => setQ(e.target.value)}
+                            />
+                            {/* <span className="sr-only">Search Pokemon by name.</span> */}
+                        </label>
+                        </div>
+
+                        
+                        
             <div className="pockemon-list-wrapper">
+
             {(isLoading)?'Loading....':
-            pockemonList.map((p)=><Pockemon name={p.name} image={p.image} id={p.id}/>)
-    }      
+            search(pockemonList).map((p)=><Pockemon name={p.name} image={p.image} id={p.id}/>)
+            }      
             </div>
             <div className='pagination'> 
             <button style={{'padding':'20px'}}    disabled={PreviousUrl==null} onClick={()=>setpockedexUrl(PreviousUrl)}>

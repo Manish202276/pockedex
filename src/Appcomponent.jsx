@@ -5,7 +5,7 @@ function App() {
   return (
     <>
         <Pockedex/>
-        <Search/>
+        {/* <Search/> */}
         <Pockemonlist/>
     </>
   )
