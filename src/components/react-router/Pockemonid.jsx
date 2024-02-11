@@ -1,19 +1,30 @@
 import { useParams } from "react-router-dom"
 import  axios  from "axios";
 import { useEffect, useState } from "react";
-export default function Pockemonid(){
+export default function Pockemonid({Searchid}){
     const {id}=useParams();
     const [obj,setobj]=useState({});
     async function downloadpockemondetails(){
-        const response=await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-        const responsedata=response.data;
-        console.log(responsedata)
+        if(Searchid){
+            console.log(Searchid);
+            const response=await axios.get(`https://pokeapi.co/api/v2/pokemon/${Searchid}`);
+            const responsedata=response.data;
         setobj({
             img:responsedata.sprites.other.dream_world.front_default,
             name:responsedata.species.name,
             height:responsedata.height,
             weight:responsedata.weight
     })
+        }else{
+            const response=await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);  
+            const responsedata=response.data;
+        setobj({
+            img:responsedata.sprites.other.dream_world.front_default,
+            name:responsedata.species.name,
+            height:responsedata.height,
+            weight:responsedata.weight
+    })
+        }
     }
     useEffect(()=>{downloadpockemondetails()},[])
     return(
